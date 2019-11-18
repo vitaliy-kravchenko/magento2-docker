@@ -1,0 +1,41 @@
+version: '3.3'
+services:
+  magento2-php:
+    container_name: magento2-php
+    image: magento2php:latest
+    networks:
+      - magento2
+    volumes:
+      - ./magento2:/var/www/magento2
+    depends_on:
+      - magento2-mysql
+
+  magento2-nginx:
+    container_name: magento2-nginx
+    build: ./nginx/
+    image: magento2-nginx:latest
+    networks:
+      - magento2
+    ports:
+      - 8081:80
+    volumes:
+      - ./magento2:/var/www/magento2:ro
+    depends_on:
+      - magento2-php
+
+  magento2-mysql:
+    container_name: magento2-mysql
+    image: mysql:5.7
+    networks:
+      - magento2
+    environment:
+      MYSQL_ROOT_PASSWORD: r00t_p@ssw0rd
+      MYSQL_USER: magento2
+      MYSQL_PASSWORD: m@gent02_p@ssW0rd
+      MYSQL_DATABASE: magento2
+    volumes:
+      - ./db-data:/var/lib/mysql
+
+networks:
+  magento2:
+    external: true
