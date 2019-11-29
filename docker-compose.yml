@@ -6,7 +6,7 @@ services:
     networks:
       - magento2
     volumes:
-      - ./magento2:/var/www/magento2
+      - ./magento2:/var/www/magento2:cached
     depends_on:
       - magento2-mysql
 
@@ -19,7 +19,7 @@ services:
     ports:
       - 8081:80
     volumes:
-      - ./magento2:/var/www/magento2:ro
+      - ./magento2:/var/www/magento2:ro,cached
     depends_on:
       - magento2-php
 

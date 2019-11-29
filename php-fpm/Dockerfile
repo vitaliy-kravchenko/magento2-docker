@@ -11,6 +11,8 @@ RUN docker-php-ext-configure gd --with-gd --with-webp-dir --with-jpeg-dir \
 RUN docker-php-ext-install -j5 bcmath gd iconv intl json mbstring \
     pdo_mysql opcache pdo soap xml xsl zip
 
+COPY php.ini $PHP_INI_DIR/
+
 ENV COMPOSER_HOME /root/composer_home
 
 RUN mkdir /root/composer_home
