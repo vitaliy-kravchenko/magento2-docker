@@ -1,3 +1,5 @@
 magento2/
 db-data/
+crontabs/
 php-fpm/auth.json
+*.log

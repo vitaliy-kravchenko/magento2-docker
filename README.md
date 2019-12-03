@@ -6,7 +6,7 @@ Copy `php-fpm/auth.json.dist` to `php-fpm/auth.json` and configure magento repo 
 
 Run `make build` for building magento2 docker containers and source directory. `./db-data` and `./magento2` directories will be created. The first one is mysql container data directory volume. The second one is magento2 php-fpm container src volume directory. 
 
-**NOTE**: At the end of this task you will get **admin page login endpoint**. Save it!
+**NOTE**: At the end of this task you will get **admin page login endpoint**. This endpoint will also be saved to `the admin_uri.log` file.
 
 By default `./env/local.build.env` file will be used. You can create any buld file for example `./env/dev.build.env` and run `make build env=dev`. Database credentials in a `*.buidl.env` file and in the `docker-compose.yml` file must be the same.
 

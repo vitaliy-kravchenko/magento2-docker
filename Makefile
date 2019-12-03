@@ -46,11 +46,14 @@ build:
 		'mysql -uroot -p$${MYSQL_ROOT_PASSWORD} -D $${MYSQL_DATABASE} -e \
 		'"'"'UPDATE `core_config_data` SET value = "UTC" WHERE `path` = "general/locale/timezone";'"'"''
 
+	@echo "\n\033[1;92m--> Setup magento2 cron jobs\033[0m\n"
+	docker run -v $${PWD}/crontabs:/var/spool/cron/crontabs ${build_args} bash -c 'bin/magento cron:install'
+
 	@echo "\n\033[1;92m--> Build nginx container\033[0m\n"
 	docker-compose build
 
 	@echo "\n\033[1;92m--> Magento admin URI\033[0m\n"
-	@cat build.log | grep "Magento Admin URI:" | cut -d" " -f2-
+	@cat build.log | grep "Magento Admin URI:" | cut -d" " -f2- | tee ./admin_uri.log
 	@rm -f ./build.log
 
 up:
@@ -74,6 +77,8 @@ destroy:
 	docker-compose images -q | xargs docker rmi
 	rm -rf ./db-data || true
 	rm -rf ./magento2 || true
+	rm -rf ./crontabs || true
+	rm -f ./admin_uri.log || true
 
 login:
 	docker-compose exec magento2-php bash

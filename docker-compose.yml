@@ -10,6 +10,19 @@ services:
     depends_on:
       - magento2-mysql
 
+  magento2-cron:
+    container_name: magento2-cron
+    image: magento2php:latest
+    networks:
+      - magento2
+    volumes:
+      - ./magento2:/var/www/magento2:cached
+      - ./crontabs:/var/spool/cron/crontabs:cached
+    depends_on:
+      - magento2-mysql
+      - magento2-php
+    command: bash -c "cron && sleep 60s && tail -F /var/www/magento2/var/log/*cron.log"
+
   magento2-nginx:
     container_name: magento2-nginx
     build: ./nginx/
