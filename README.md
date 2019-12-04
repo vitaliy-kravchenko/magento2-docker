@@ -6,7 +6,7 @@ Copy `php-fpm/auth.json.dist` to `php-fpm/auth.json` and configure magento repo 
 
 Run `make build` for building magento2 docker containers and source directory. `./db-data` and `./magento2` directories will be created. The first one is mysql container data directory volume. The second one is magento2 php-fpm container src volume directory. 
 
-**NOTE**: At the end of this task you will get **admin page login endpoint**. This endpoint will also be saved to `the admin_uri.log` file.
+**NOTE**: At the end of this task you will get **admin page login endpoint**. This endpoint will also be saved to the `./admin_uri.log` file.
 
 By default `./env/local.build.env` file will be used. You can create any buld file for example `./env/dev.build.env` and run `make build env=dev`. Database credentials in a `*.buidl.env` file and in the `docker-compose.yml` file must be the same.
 
@@ -16,13 +16,13 @@ Run `make up` to run all of the containers in the `docker-compose.yml`
 
 ### Deploy sample data
 
-Run `make sampledata` to deploy sample data. Run it only after build and 
+Run `make sampledata` to deploy sample data. Run it only after build and run all of the containers
 
 ### Stop and destroy
 
 1. Run `make down` to stop all of the containers.
 
-2. Run `make destroy` to remove all generated data - docker containers, volumes, networks. `./db-data` and `./magento2` directories will be removed too.
+2. Run `make destroy` to remove all generated data - docker containers, volumes, networks. `./db-data`, `./magento2`, and `./crontabs` directories will be removed too.
 
 ### Run magento commands
 
