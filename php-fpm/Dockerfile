@@ -5,8 +5,7 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
     libxpm-dev libxslt-dev libwebp-dev unzip git cron procps
 
 RUN docker-php-ext-configure gd --with-gd --with-webp-dir --with-jpeg-dir \
-    --with-png-dir --with-zlib-dir --with-xpm-dir --with-freetype-dir \
-    --enable-gd-native-ttf
+    --with-png-dir --with-zlib-dir --with-xpm-dir --with-freetype-dir
 
 RUN docker-php-ext-install -j5 bcmath gd iconv intl json mbstring \
     pdo_mysql opcache pdo soap xml xsl zip
