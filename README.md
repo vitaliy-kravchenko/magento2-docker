@@ -1,5 +1,7 @@
 ## Magento2 docker
 
+Magento2 version: 2.4.1
+
 ### Build and run
 
 Copy `php-fpm/auth.json.dist` to `php-fpm/auth.json` and configure magento repo credentials. How to create magento credentials look at [this magento doc page](https://devdocs.magento.com/guides/v2.3/install-gde/prereq/connect-auth.html).
@@ -16,7 +18,7 @@ Run `make up` to run all of the containers in the `docker-compose.yml`
 
 ### Deploy sample data
 
-Run `make sampledata` to deploy sample data. Run it only after build and run all of the containers
+Run `make sampledata` to deploy sample data. Run it only after `make build` and `make up` commands
 
 ### Stop and destroy
 
@@ -35,3 +37,7 @@ Run `make login` to login inside magento2-php container. Now you can run any mag
 2. Run `make down` to stop and `make up` to start all builded containers. Short analog of `docker-compose up/down`
 
 3. Run `make ps` to show all the containers status. Short analog of `docker-compose ps`.
+
+### Troubleshooting
+
+If build fails with `make: *** [build] Error 137`, increase containers memory limit up to 4Gb in Docker configuration.
